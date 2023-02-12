@@ -38,13 +38,28 @@ public class SpawnHighway : MonoBehaviour
 
             highwayModuleNew = highwayModules[Random.Range(0, highwayModules.Count)];
 
+            highwayModuleNew.SetActive(true);
+
+            float zSum =
+                highwayModuleNew.transform
+                    .GetChild(0)
+                    .GetChild(0)
+                    .gameObject.GetComponent<Collider>()
+                    .bounds.extents.z
+                + currentModules[1].transform
+                    .GetChild(0)
+                    .GetChild(0)
+                    .gameObject.GetComponent<Collider>()
+                    .bounds.extents.z;
+
+            Debug.Log(zSum);
+
             Vector3 newPos = new Vector3(
                 currentModules[1].transform.position.x,
                 currentModules[1].transform.position.y,
-                currentModules[1].transform.position.z + 360
+                currentModules[1].transform.position.z + zSum
             );
 
-            highwayModuleNew.SetActive(true);
             highwayModuleNew.transform.position = newPos;
 
             currentModules.Add(highwayModuleNew);
