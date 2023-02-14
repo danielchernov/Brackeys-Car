@@ -6,6 +6,13 @@ public class RusitosCarController : MonoBehaviour
 {
     Vector2 movement;
     public Animator wheelAnimator;
+    public GameObject speedometer;
+    public GameObject accelmeter;
+    public GameObject centerMass;
+
+    Rigidbody carBody;
+
+    bool isAutopilot = false;
 
     public WheelCollider wheelFrontRight;
     public WheelCollider wheelFrontLeft;
@@ -20,15 +27,42 @@ public class RusitosCarController : MonoBehaviour
     float currentBrakeForce = 0;
     float currentTurnAngle = 0;
 
-    void Start() { }
+    void Start()
+    {
+        carBody = GetComponent<Rigidbody>();
+        carBody.centerOfMass = centerMass.transform.localPosition;
+
+        isAutopilot = true;
+    }
 
     void FixedUpdate()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxis("Vertical");
 
-        currentAccel = accel * movement.y;
+        if (isAutopilot)
+        {
+            currentAccel = accel * 1;
+            accelmeter.transform.rotation = Quaternion.Euler(0, 0, -1 * 50);
+        }
+        else
+        {
+            currentAccel = accel * movement.y;
+        }
+
         currentTurnAngle = maxTurnAngle * movement.x;
+
+        if (movement.y != 0)
+        {
+            isAutopilot = false;
+        }
+
+        speedometer.transform.rotation = Quaternion.Euler(
+            0,
+            0,
+            Mathf.Clamp(-carBody.velocity.z * 2, -160, 0)
+        );
+        accelmeter.transform.rotation = Quaternion.Euler(0, 0, -movement.y * 50);
 
         if (movement.x == -1)
         {
@@ -53,6 +87,12 @@ public class RusitosCarController : MonoBehaviour
         else
         {
             currentBrakeForce = 0;
+        }
+
+        if (Input.GetButton("RotateCar"))
+        {
+            transform.position = new Vector3(-5, 8, transform.position.z);
+            transform.rotation = Quaternion.identity;
         }
 
         wheelFrontLeft.motorTorque = currentAccel;
