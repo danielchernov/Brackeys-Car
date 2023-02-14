@@ -52,7 +52,7 @@ public class SpawnHighway : MonoBehaviour
                     .gameObject.GetComponent<Collider>()
                     .bounds.extents.z;
 
-            Debug.Log(zSum);
+            //Debug.Log(zSum);
 
             Vector3 newPos = new Vector3(
                 currentModules[1].transform.position.x,

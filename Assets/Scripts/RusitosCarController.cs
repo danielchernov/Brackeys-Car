@@ -43,11 +43,12 @@ public class RusitosCarController : MonoBehaviour
         if (isAutopilot)
         {
             currentAccel = accel * 1;
-            accelmeter.transform.rotation = Quaternion.Euler(0, 0, -1 * 50);
+            accelmeter.transform.rotation = Quaternion.Euler(0, 0, -50);
         }
         else
         {
             currentAccel = accel * movement.y;
+            accelmeter.transform.rotation = Quaternion.Euler(0, 0, -movement.y * 50);
         }
 
         currentTurnAngle = maxTurnAngle * movement.x;
@@ -62,7 +63,6 @@ public class RusitosCarController : MonoBehaviour
             0,
             Mathf.Clamp(-carBody.velocity.z * 2, -160, 0)
         );
-        accelmeter.transform.rotation = Quaternion.Euler(0, 0, -movement.y * 50);
 
         if (movement.x == -1)
         {
