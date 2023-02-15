@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject creditsMenu;
+    public GameObject mainMenu;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -18,5 +21,17 @@ public class MainMenu : MonoBehaviour
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    public void CreditsButton()
+    {
+        creditsMenu.SetActive(true);
+        mainMenu.SetActive(false);
+    }
+
+    public void BackButton()
+    {
+        creditsMenu.SetActive(false);
+        mainMenu.SetActive(true);
     }
 }
