@@ -5,8 +5,8 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-    public Transform playerBody;
-    public Texture2D cursorTexture;
+
+    //public Transform playerBody;
 
     float xRotation = 0;
     float yRotation = 0;

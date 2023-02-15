@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-
-
 public class AudioMenu : MonoBehaviour
 {
     public AudioMixer mainMixer;
@@ -13,7 +11,7 @@ public class AudioMenu : MonoBehaviour
 
     void Start()
     {
-        if(PlayerPrefs.GetFloat("volume") != 0)
+        if (PlayerPrefs.GetFloat("volume") != 0)
         {
             soundSlider.value = PlayerPrefs.GetFloat("volume");
         }

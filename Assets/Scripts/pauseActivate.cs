@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class pauseActivate : MonoBehaviour
 {
-    public AudioSource backgroundAudio;
+    public AudioSource[] backgroundAudio;
     public GameObject pauseMenu;
 
     void Update()
@@ -14,12 +14,14 @@ public class pauseActivate : MonoBehaviour
             if (!pauseMenu.activeSelf)
             {
                 pauseMenu.SetActive(true);
-                backgroundAudio.Pause();
+                for (int i = 0; i < backgroundAudio.Length; i++)
+                    backgroundAudio[i].Pause();
             }
             else
             {
                 pauseMenu.SetActive(false);
-                backgroundAudio.Play();
+                for (int i = 0; i < backgroundAudio.Length; i++)
+                    backgroundAudio[i].UnPause();
             }
         }
     }

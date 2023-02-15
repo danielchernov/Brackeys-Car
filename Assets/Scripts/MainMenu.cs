@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void PlayButton()
     {
         SceneManager.LoadScene(1);
     }
-
-    //public void ContinueButton()
-    //{
-    //    SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
-    //}
 
     public void QuitButton()
     {
