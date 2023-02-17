@@ -27,18 +27,24 @@ public class RusitosCarController : MonoBehaviour
     float currentBrakeForce = 0;
     float currentTurnAngle = 0;
 
+    bool carLocked = true;
+
     void Start()
     {
         carBody = GetComponent<Rigidbody>();
         carBody.centerOfMass = centerMass.transform.localPosition;
 
         isAutopilot = true;
+        StartCoroutine(WaitAndChange());
     }
 
     void FixedUpdate()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+        if (!carLocked)
+        {
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxis("Vertical");
+        }
 
         if (isAutopilot)
         {
@@ -107,5 +113,11 @@ public class RusitosCarController : MonoBehaviour
 
         wheelFrontLeft.steerAngle = currentTurnAngle;
         wheelFrontRight.steerAngle = currentTurnAngle;
+    }
+
+    IEnumerator WaitAndChange()
+    {
+        yield return new WaitForSeconds(10);
+        carLocked = !carLocked;
     }
 }
