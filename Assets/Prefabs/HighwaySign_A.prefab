@@ -321,7 +321,7 @@ Transform:
   - {fileID: 2936793069638923953}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &3034919154862820924
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 2936793069638923953}
   - component: {fileID: 377363156723707107}
   - component: {fileID: 8335095350591800905}
+  - component: {fileID: 1504555309}
   m_Layer: 0
   m_Name: BigCollider
   m_TagString: Untagged
@@ -455,6 +456,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 140be90919043bf409c1bd1ad5e8c2fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1504555309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6689836123236635731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbf1d6be29176a41b24b149ecc42488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7223073063705247390

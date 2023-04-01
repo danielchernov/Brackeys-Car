@@ -13,6 +13,7 @@ public class RusitosCarController : MonoBehaviour
     Rigidbody carBody;
 
     bool isAutopilot = false;
+    public GameObject autopilotLight;
 
     public WheelCollider wheelFrontRight;
     public WheelCollider wheelFrontLeft;
@@ -27,7 +28,10 @@ public class RusitosCarController : MonoBehaviour
     float currentBrakeForce = 0;
     float currentTurnAngle = 0;
 
-    bool carLocked = true;
+    public bool carLocked = true;
+    public bool notInEnding = true;
+
+    public GameObject controls;
 
     void Start()
     {
@@ -95,10 +99,37 @@ public class RusitosCarController : MonoBehaviour
             currentBrakeForce = 0;
         }
 
-        if (Input.GetButton("RotateCar"))
+        if (Input.GetKeyDown(KeyCode.C))
         {
+            if (!controls.activeSelf)
+                controls.SetActive(true);
+            else
+                controls.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.T) && movement.y == 0)
+        {
+            isAutopilot = !isAutopilot;
+        }
+        //Debug.Log(transform.rotation.y * 180);
+        if (
+            Input.GetButton("RotateCar")
+            || transform.rotation.y * 180 > 130 && transform.rotation.y * 180 < 240 && notInEnding
+            || transform.rotation.y * 180 < -130 && transform.rotation.y * 180 > -240 && notInEnding
+        )
+        {
+            carBody.velocity = Vector3.zero;
             transform.position = new Vector3(-5, 8, transform.position.z);
             transform.rotation = Quaternion.identity;
+        }
+
+        if (isAutopilot && !autopilotLight.activeSelf)
+        {
+            autopilotLight.SetActive(true);
+        }
+
+        if (!isAutopilot && autopilotLight.activeSelf)
+        {
+            autopilotLight.SetActive(false);
         }
 
         wheelFrontLeft.motorTorque = currentAccel;
@@ -117,7 +148,7 @@ public class RusitosCarController : MonoBehaviour
 
     IEnumerator WaitAndChange()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(2);
         carLocked = !carLocked;
     }
 }

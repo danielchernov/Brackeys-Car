@@ -58,7 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4267da0be6ff8114aba3d7a4a8af6224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highwayModuleOld: {fileID: 0}
-  highwayModuleNew: {fileID: 0}
+  allModulesParent: {fileID: 0}
+  currentModulesParent: {fileID: 0}
   highwayModules: []
   currentModules: []
+  endingModule: {fileID: 2351190235646168356, guid: d0ec2167664fd784382fb56bd9275cea, type: 3}

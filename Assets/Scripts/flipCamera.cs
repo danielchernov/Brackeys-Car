@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class flipCamera : MonoBehaviour
 {
-    new Camera camera;
+    Camera flipinCamera;
     public bool flipHorizontal;
 
     void Awake()
     {
-        camera = GetComponent<Camera>();
+        flipinCamera = GetComponent<Camera>();
     }
 
     void Start()
     {
-        camera.ResetWorldToCameraMatrix();
-        camera.ResetProjectionMatrix();
+        flipinCamera.ResetWorldToCameraMatrix();
+        flipinCamera.ResetProjectionMatrix();
         Vector3 scale = new Vector3(flipHorizontal ? -1 : 1, 1, 1);
-        camera.projectionMatrix = camera.projectionMatrix * Matrix4x4.Scale(scale);
+        flipinCamera.projectionMatrix = flipinCamera.projectionMatrix * Matrix4x4.Scale(scale);
     }
 
     void OnPreCull()
     {
-        camera.ResetWorldToCameraMatrix();
-        camera.ResetProjectionMatrix();
+        flipinCamera.ResetWorldToCameraMatrix();
+        flipinCamera.ResetProjectionMatrix();
         Vector3 scale = new Vector3(flipHorizontal ? -1 : 1, 1, 1);
-        camera.projectionMatrix = camera.projectionMatrix * Matrix4x4.Scale(scale);
+        flipinCamera.projectionMatrix = flipinCamera.projectionMatrix * Matrix4x4.Scale(scale);
     }
 
     void OnPreRender()

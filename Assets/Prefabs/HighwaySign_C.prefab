@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2677919266997317596}
   - component: {fileID: 6602942807594658759}
   - component: {fileID: 877819885687609502}
+  - component: {fileID: 811439058}
   m_Layer: 0
   m_Name: BigCollider
   m_TagString: Untagged
@@ -58,6 +59,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140be90919043bf409c1bd1ad5e8c2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &811439058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700463061413757960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbf1d6be29176a41b24b149ecc42488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highwayNr: 2
 --- !u!1 &1713418527414587815
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +111,7 @@ Transform:
   - {fileID: 2677919266997317596}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &1713418527415553447
 MeshFilter:
   m_ObjectHideFlags: 0

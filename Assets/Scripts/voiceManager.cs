@@ -49,9 +49,20 @@ public class voiceManager : MonoBehaviour
     public bool mainIsBlocked = false;
     public bool neverPlayedEaster = true;
 
+    public bool Checkpoint1 = false;
+    public bool Checkpoint2 = false;
+    public bool Checkpoint3 = false;
+    public bool Checkpoint4 = false;
+    public bool Checkpoint5 = false;
+
+    public bool endingA = false;
+    public bool endingB = false;
+
+    public GameObject endingCurtain;
+
     void Start()
     {
-        StartCoroutine(DoMainVoice(4, "I remember the freeway.", 0));
+        StartCoroutine(DoMainVoice(6, "I remember the freeway.", 0));
         itemsAreBlocked = true;
     }
 
@@ -478,12 +489,18 @@ public class voiceManager : MonoBehaviour
 
         if (!voiceSource.isPlaying)
         {
-            if (voiceClipNumber >= 0 && voiceClipNumber <= voicesMain.Length)
+            //Debug.Log(voiceClipNumber);
+
+            if (endingB)
             {
-                Debug.Log(voiceClipNumber);
-                voiceSource.clip = voicesMain[voiceClipNumber];
-                voiceSource.Play();
+                voiceSource.clip = voicesMain[voiceClipNumber + 4];
             }
+            else
+            {
+                voiceSource.clip = voicesMain[voiceClipNumber];
+            }
+
+            voiceSource.Play();
 
             Subtitles.SetActive(true);
             subtitleText = Subtitles.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
@@ -498,7 +515,7 @@ public class voiceManager : MonoBehaviour
             {
                 StartCoroutine(
                     DoMainVoice(
-                        2,
+                        3,
                         "The lights moving from the horizon to the rearview mirror.",
                         voiceClipNumber
                     )
@@ -508,7 +525,7 @@ public class voiceManager : MonoBehaviour
             {
                 StartCoroutine(
                     DoMainVoice(
-                        1f,
+                        2,
                         "The cars approaching me, then leaving me behind.",
                         voiceClipNumber
                     )
@@ -523,6 +540,14 @@ public class voiceManager : MonoBehaviour
                         voiceClipNumber
                     )
                 );
+
+                Vector3 highwaySignPos = new Vector3(
+                    -6,
+                    6,
+                    carLights[0].transform.position.z + 1000
+                );
+                Quaternion signRotation = Quaternion.Euler(-90, 0, 0);
+                GameObject sign = Instantiate(highwaySigns[0], highwaySignPos, signRotation);
             }
             if (voiceClipNumber == 4)
             {
@@ -533,26 +558,23 @@ public class voiceManager : MonoBehaviour
                         voiceClipNumber
                     )
                 );
-
-                Vector3 highwaySignPos = new Vector3(
-                    -6,
-                    6,
-                    carLights[0].transform.position.z + 600
-                );
-                Quaternion signRotation = Quaternion.Euler(-90, 0, 0);
-                GameObject sign = Instantiate(highwaySigns[0], highwaySignPos, signRotation);
             }
             if (voiceClipNumber == 5)
             {
+                itemsAreBlocked = false;
+
+                while (!Checkpoint1)
+                {
+                    yield return new WaitForSeconds(2f);
+                }
+
                 StartCoroutine(
                     DoMainVoice(
-                        8,
+                        2,
                         "How long had I lived in Los Angeles? Was I really leaving?",
                         voiceClipNumber
                     )
                 );
-
-                itemsAreBlocked = false;
             }
             if (voiceClipNumber == 6)
             {
@@ -591,16 +613,20 @@ public class voiceManager : MonoBehaviour
                 Vector3 highwaySignPos = new Vector3(
                     -6,
                     6,
-                    carLights[0].transform.position.z + 600
+                    carLights[0].transform.position.z + 1000
                 );
                 Quaternion signRotation = Quaternion.Euler(-90, 0, 0);
                 GameObject sign = Instantiate(highwaySigns[1], highwaySignPos, signRotation);
             }
             if (voiceClipNumber == 9)
             {
+                while (!Checkpoint2)
+                {
+                    yield return new WaitForSeconds(2f);
+                }
                 StartCoroutine(
                     DoMainVoice(
-                        8,
+                        4,
                         "I couldn't complain, though. I had a job waiting for me in Austin.",
                         voiceClipNumber
                     )
@@ -666,46 +692,57 @@ public class voiceManager : MonoBehaviour
                 Vector3 highwaySignPos = new Vector3(
                     -6,
                     6,
-                    carLights[0].transform.position.z + 600
+                    carLights[0].transform.position.z + 1000
                 );
                 Quaternion signRotation = Quaternion.Euler(-90, 0, 0);
                 GameObject sign = Instantiate(highwaySigns[2], highwaySignPos, signRotation);
             }
             if (voiceClipNumber == 16)
             {
+                itemsAreBlocked = false;
+
+                while (!Checkpoint3)
+                {
+                    yield return new WaitForSeconds(2f);
+                }
+
                 StartCoroutine(
                     DoMainVoice(
-                        8,
+                        5,
                         "Suddenly the thought of leaving my car in the hands of a stranger, minutes from then, shook me.",
                         voiceClipNumber
                     )
                 );
-                itemsAreBlocked = false;
             }
             if (voiceClipNumber == 17)
             {
+                itemsAreBlocked = true;
                 StartCoroutine(
                     DoMainVoice(
-                        1,
+                        2,
                         "But I knew it was the right thing to do. I had made up my mind. I was leaving town.",
                         voiceClipNumber
                     )
                 );
-                itemsAreBlocked = true;
             }
             if (voiceClipNumber == 18)
             {
+                itemsAreBlocked = false;
+                while (!Checkpoint4)
+                {
+                    yield return new WaitForSeconds(2f);
+                }
                 StartCoroutine(
                     DoMainVoice(
-                        6,
+                        1,
                         "As I saw the sign, an invisible force yanked my hands to the right. What the hell was going on with me?",
                         voiceClipNumber
                     )
                 );
-                itemsAreBlocked = false;
             }
             if (voiceClipNumber == 19)
             {
+                itemsAreBlocked = true;
                 StartCoroutine(
                     DoMainVoice(
                         1,
@@ -713,7 +750,6 @@ public class voiceManager : MonoBehaviour
                         voiceClipNumber
                     )
                 );
-                itemsAreBlocked = true;
             }
             if (voiceClipNumber == 20)
             {
@@ -731,7 +767,100 @@ public class voiceManager : MonoBehaviour
                     )
                 );
             }
+            if (voiceClipNumber == 22)
+            {
+                while (!Checkpoint5)
+                {
+                    yield return new WaitForSeconds(1f);
+                }
+                if (endingA)
+                {
+                    StartCoroutine(
+                        DoMainVoice(1, "At the last moment, reason prevailed.", voiceClipNumber)
+                    );
+                }
+                else if (endingB)
+                {
+                    StartCoroutine(
+                        DoMainVoice(
+                            1,
+                            "As soon as I took the exit, I felt a sudden heat going up my chest. I tightened my grip around the wheel.",
+                            voiceClipNumber
+                        )
+                    );
+                }
+            }
+            if (voiceClipNumber == 23)
+            {
+                if (endingA)
+                {
+                    StartCoroutine(
+                        DoMainVoice(
+                            1,
+                            "I wouldn't sacrifice my life for some stupid dream. Before I'd know it, I'd be living in a tent under the freeway.",
+                            voiceClipNumber
+                        )
+                    );
+                }
+                else if (endingB)
+                {
+                    StartCoroutine(
+                        DoMainVoice(
+                            1,
+                            "Fuck home. Fuck that job. Fuck having money. I didn't want a new beginning.",
+                            voiceClipNumber
+                        )
+                    );
+                }
+            }
+            if (voiceClipNumber == 24)
+            {
+                if (endingA)
+                {
+                    StartCoroutine(
+                        DoMainVoice(
+                            1,
+                            "I took a deep breath and caressed the wheel.",
+                            voiceClipNumber
+                        )
+                    );
+                }
+                else if (endingB)
+                {
+                    StartCoroutine(
+                        DoMainVoice(
+                            1,
+                            "<i>Who</i> needed Hollywood dreams? I did.",
+                            voiceClipNumber
+                        )
+                    );
+                }
+            }
+            if (voiceClipNumber == 25)
+            {
+                if (endingA)
+                {
+                    StartCoroutine(DoMainVoice(1, "Time to grow up.", voiceClipNumber));
+                }
+                else if (endingB)
+                {
+                    StartCoroutine(startEnding());
+                }
+            }
+            if (voiceClipNumber == 26)
+            {
+                if (endingA)
+                {
+                    StartCoroutine(startEnding());
+                }
+            }
         }
+    }
+
+    IEnumerator startEnding()
+    {
+        yield return new WaitForSeconds(2);
+        endingCurtain.SetActive(true);
     }
 
     IEnumerator SpitSubtitles(

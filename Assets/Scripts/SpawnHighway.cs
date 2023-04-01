@@ -11,6 +11,14 @@ public class SpawnHighway : MonoBehaviour
     public GameObject currentModulesParent;
     public List<GameObject> highwayModules = new List<GameObject>();
     public List<GameObject> currentModules = new List<GameObject>();
+    public GameObject endingModule;
+
+    voiceManager voiceManager;
+
+    void Start()
+    {
+        voiceManager = GameObject.Find("VoiceManager").GetComponent<voiceManager>();
+    }
 
     void OnTriggerEnter(Collider collider)
     {
@@ -36,9 +44,16 @@ public class SpawnHighway : MonoBehaviour
                 highwayModules.Add(allModulesParent.transform.GetChild(i).gameObject);
             }
 
-            highwayModuleNew = highwayModules[Random.Range(0, highwayModules.Count)];
-
-            highwayModuleNew.SetActive(true);
+            if (voiceManager.Checkpoint3 && !endingModule.activeSelf)
+            {
+                highwayModuleNew = endingModule;
+                highwayModuleNew.SetActive(true);
+            }
+            else
+            {
+                highwayModuleNew = highwayModules[Random.Range(0, highwayModules.Count)];
+                highwayModuleNew.SetActive(true);
+            }
 
             float zSum =
                 highwayModuleNew.transform
